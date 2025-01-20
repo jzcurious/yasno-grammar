@@ -1,0 +1,45 @@
+block MyBlock1 {
+    inputs:
+        Int x;
+        Int y;
+
+    outputs:
+        Int z = f(x, y);
+
+    details:
+        block f: (Int x, Int y) -> (Int z) {
+            z = x + y;
+        };
+};
+
+interface MyInterface1 {
+    inputs:
+        Int x;
+        Int y;
+
+    outputs:
+        Int z;
+};
+
+interface MyInterface2 = (Int x, Int y) -> (Int z);
+
+block MyBlock: MyInterface2 {
+    details:
+        z = x + y;
+};
+
+block f: (Int x, Int y) -> (Int z) {
+    z = x + y;
+};
+
+some_func(Int x, Int y) -> (Int z) {
+    z = x + y;
+};
+
+block MyBlock3: MyBlock1 {
+    outputs:
+        Int c;
+
+    details:
+        c = super.x * super.z;
+};
